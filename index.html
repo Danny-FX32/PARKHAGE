@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<title>Parkhage Comedy</title>
+
+<style>
+:root{
+  --primary:#ffcc00;
+  --dark:#0b0b0b;
+  --card:#151515;
+  --text:#cccccc;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,Arial,sans-serif}
+
+body{background:var(--dark);color:white;line-height:1.6}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(10px);
+  padding:1rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  animation:drop .8s ease
+}
+
+@keyframes drop{
+  from{transform:translateY(-50px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+header h1{color:var(--primary)}
+nav a{color:white;margin-left:1.2rem;text-decoration:none}
+nav a:hover{color:var(--primary); transition: 0.5s;}
+
+/* HERO */
+.hero{
+  min-height:95vh;
+  background:
+    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.9)),
+    url("images/IMG-20260127-WA0054.jpg");
+  background-size:cover;
+  background-position:center;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center
+}
+
+.hero-content{animation:fadeUp 1.2s ease forwards}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(50px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.hero h2{font-size:2.6rem;margin-bottom:1rem}
+.hero p{color:var(--text);max-width:650px;margin:auto}
+
+.btn{
+  display:inline-block;margin-top:1.5rem;
+  padding:.9rem 2rem;border-radius:30px;
+  background:var(--primary);color:black;
+  font-weight:bold;text-decoration:none;
+  transition:.3s;
+  border: none;
+}
+
+.btn:hover{background:white;transform:scale(1.08)}
+
+section{
+  padding:4.5rem 2rem;max-width:1200px;margin:auto;
+  animation:fadeSection 1s ease both
+}
+
+@keyframes fadeSection{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+section h3{color:var(--primary);margin-bottom:1.2rem;font-size:2rem}
+
+/* ABOUT */
+.about-wrapper{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2rem;align-items:center
+}
+
+.about-wrapper img{
+  width:100%;height:300px;object-fit:cover;
+  border-radius:15px;transition:.5s;
+  object-position: 1px 1px ;
+}
+
+.about-wrapper img:hover{transform:scale(1.05)}
+
+.about p{color:var(--text)}
+
+/* EVENT */
+.event-card{
+  background:var(--card);border-radius:15px;
+  padding:2rem;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2rem;align-items:center
+}
+
+.event-card img{
+  width:100%;border-radius:15px;transition:.4s
+}
+
+.event-card img:hover{transform:scale(1.05)}
+
+.event-card span{display:block;margin-top:.7rem;font-weight:bold}
+
+/* GALLERY */
+.gallery{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1rem
+}
+
+.gallery img{
+  width:100%;height:230px;object-fit:cover;
+  border-radius:12px;transition:.3s
+}
+
+.gallery img:hover{transform:scale(1.1)}
+
+/* CONTACT */
+.contact form{max-width:500px;margin-top:2rem;display:grid;gap:1rem}
+.contact input,.contact textarea{
+  padding:.9rem;border-radius:8px;border:none;outline:none
+}
+
+/* SOCIALS */
+.socials{display:flex;gap:1rem;justify-content:center;margin-top:1rem;}
+.socials a{
+  width:40px;height:40px;background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;color:white;transition:.3s;
+  text-decoration: none;
+}
+
+.socials a:hover{
+  background:var(--primary);color:black;transform:translateY(-4px)
+}
+
+footer{
+  background:black;text-align:center;padding:2rem;color:#777
+}
+
+@media(max-width:768px){
+  .hero h2{font-size:2rem}
+}
+
+/* HAMBURGER */
+.menu-toggle{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+
+.menu-toggle span{
+  width:25px;
+  height:3px;
+  background:white;
+  border-radius:3px;
+}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+  nav{
+    position:absolute;
+    top:65px;
+    right:0;
+    background:black;
+    width:100%;
+    display:none;
+    flex-direction:column;
+    text-align:center;
+    padding:1.5rem 0;
+  }
+
+  nav a{
+    margin:1rem 0;
+    font-size:1.2rem;
+  }
+
+  nav.show{
+    display:flex;
+  }
+
+  .menu-toggle{
+    display:flex;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1 style="font-size: 30px">PARKHAGE</h1>
+
+  <!-- HAMBURGER -->
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navMenu">
+    <a href="#about">About</a>
+    <a href="#event">Event</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Book</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Comedy That Feels Real</h2>
+    <p>Real-life stories, NYSC experiences, and everyday Nigerian moments turned into unforgettable laughter. </p>
+    <a href="#contact" class="btn">Book a Seat</a>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <h3>About Parkhage</h3>
+  <div class="about-wrapper">
+    <img src="images/IMG-20260127-WA0057.jpg" alt="Parkhage">
+    <p>
+      Born Oyediran Olatoyese Samuel,from Moniya, Ibadan,
+He carries the spirit of his home in every story.
+Ọmọ Ẹkùn brings humor out of real life,
+Revealing the beauty in joy, in pain, and in life’s small moments.
+Through him, we learn to live freely,
+To laugh, to feel, and to enjoy every moment we have.
+    </p>
+  </div>
+</section>
+
+<section id="event">
+  <h3>Upcoming Event</h3>
+  <div class="event-card">
+    <img src="images/IMG-20260207-WA0013.jpg" alt="Event">
+    <div>
+      <h4>Corper Samuel – NYSC Comedy Experience</h4>
+      <p>It shows the struggle, the hope, the confusion, and the growth young Nigerians experience during service. He turns everyday camp monent into laughter and lessons, reminding us that unity and national building begin with shared experience </p>
+      <h2 style="color: rgb(198, 165, 19);"> Up Coming Events</h2>
+      <span>📅 October 4th, 2026</span>
+      <span>🎭 Live Comedy Experience</span>
+      <a href="#contact" class="btn">Reserve Seat</a>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <h3>Comedy Moments</h3>
+  <div class="gallery">
+    <img src="images/IMG-20260129-WA0002.jpg">
+    <img src="images/IMG-20260129-WA0001.jpg">
+    <img src="images/IMG-20260129-WA0000.jpg">
+    <img src="https://images.unsplash.com/photo-1520975922324-8fca3a4c9b1b">
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h3>Book a Seat / Contact</h3>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="4" placeholder="Your Message" required></textarea>
+    <button class="btn">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>Follow Parkhage</p>
+  <div class="socials">
+    <a href="https://www.instagram.com/iam_parkhage" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://x.com/iam_parkhage" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://youtube.com/@parkhage" target="_blank"><i class="fab fa-youtube"></i></a>
+  </div>
+  <p style="margin-top:1rem">© 2026 Parkhage Comedy. All Rights Reserved.</p>
+</footer>
+</body>
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+  });
+
+  // Close menu when link is clicked
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("show");
+    });
+  });
+</script>
+</html>
