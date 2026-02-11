@@ -33,7 +33,7 @@ header{
   to{transform:translateY(0);opacity:1}
 }
 
-header h1{color:var(--primary)}
+header h1{color:var(--primary); font-size: 20px;}
 nav a{color:white;margin-left:1.2rem;text-decoration:none}
 nav a:hover{color:var(--primary); transition: 0.5s;}
 
@@ -66,6 +66,7 @@ nav a:hover{color:var(--primary); transition: 0.5s;}
   font-weight:bold;text-decoration:none;
   transition:.3s;
   border: none;
+  cursor: pointer;
 }
 
 .btn:hover{background:white;transform:scale(1.08)}
@@ -153,65 +154,13 @@ footer{
 @media(max-width:768px){
   .hero h2{font-size:2rem}
 }
-
-/* HAMBURGER */
-.menu-toggle{
-  display:none;
-  flex-direction:column;
-  gap:5px;
-  cursor:pointer;
-}
-
-.menu-toggle span{
-  width:25px;
-  height:3px;
-  background:white;
-  border-radius:3px;
-}
-
-/* MOBILE NAV */
-@media(max-width:768px){
-  nav{
-    position:absolute;
-    top:65px;
-    right:0;
-    background:black;
-    width:100%;
-    display:none;
-    flex-direction:column;
-    text-align:center;
-    padding:1.5rem 0;
-  }
-
-  nav a{
-    margin:1rem 0;
-    font-size:1.2rem;
-  }
-
-  nav.show{
-    display:flex;
-  }
-
-  .menu-toggle{
-    display:flex;
-  }
-}
 </style>
 </head>
 
 <body>
 <header>
-  <h1 style="font-size: 30px">PARKHAGE</h1>
-
-  <!-- HAMBURGER -->
-  <div class="menu-toggle" id="menuToggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-  <!-- NAV -->
-  <nav id="navMenu">
+  <h1>PARKHAGE</h1>
+  <nav>
     <a href="#about">About</a>
     <a href="#event">Event</a>
     <a href="#gallery">Gallery</a>
@@ -222,8 +171,9 @@ footer{
 <section class="hero">
   <div class="hero-content">
     <h2>Comedy That Feels Real</h2>
-    <p>Real-life stories, NYSC experiences, and everyday Nigerian moments turned into unforgettable laughter. </p>
-    <a href="#contact" class="btn">Book a Seat</a>
+    <p>Real-life stories, NYSC experiences, and everyday Nigerian moments turned into unforgettable laughter.</p>
+    <!-- Button to trigger Paystack -->
+    <button class="btn" onclick="payWithPaystack()">Buy Ticket</button>
   </div>
 </section>
 
@@ -232,12 +182,9 @@ footer{
   <div class="about-wrapper">
     <img src="images/IMG-20260127-WA0057.jpg" alt="Parkhage">
     <p>
-      Born Oyediran Olatoyese Samuel,from Moniya, Ibadan,
-He carries the spirit of his home in every story.
-Ọmọ Ẹkùn brings humor out of real life,
-Revealing the beauty in joy, in pain, and in life’s small moments.
-Through him, we learn to live freely,
-To laugh, to feel, and to enjoy every moment we have.
+      Born Oyediran Olatoyese Samuel, from Moniya, Ibadan. He carries the spirit of his home in every story.
+      Ọmọ Ẹkùn brings humor out of real life, revealing the beauty in joy, in pain, and in life’s small moments.
+      Through him, we learn to live freely, laugh, and enjoy every moment we have.
     </p>
   </div>
 </section>
@@ -248,11 +195,10 @@ To laugh, to feel, and to enjoy every moment we have.
     <img src="images/IMG-20260207-WA0013.jpg" alt="Event">
     <div>
       <h4>Corper Samuel – NYSC Comedy Experience</h4>
-      <p>It shows the struggle, the hope, the confusion, and the growth young Nigerians experience during service. He turns everyday camp monent into laughter and lessons, reminding us that unity and national building begin with shared experience </p>
-      <h2 style="color: rgb(198, 165, 19);"> Up Coming Events</h2>
+      <p>It shows the struggle, hope, confusion, and growth young Nigerians experience during service. He turns everyday camp moments into laughter and lessons.</p>
+      <h2 style="color: rgb(198, 165, 19);">Upcoming Events</h2>
       <span>📅 October 4th, 2026</span>
       <span>🎭 Live Comedy Experience</span>
-      <a href="#contact" class="btn">Reserve Seat</a>
     </div>
   </div>
 </section>
@@ -268,7 +214,7 @@ To laugh, to feel, and to enjoy every moment we have.
 </section>
 
 <section id="contact" class="contact">
-  <h3>Book a Seat / Contact</h3>
+  <h3>Contact / Book</h3>
   <form>
     <input type="text" placeholder="Your Name" required>
     <input type="email" placeholder="Your Email" required>
@@ -286,20 +232,26 @@ To laugh, to feel, and to enjoy every moment we have.
   </div>
   <p style="margin-top:1rem">© 2026 Parkhage Comedy. All Rights Reserved.</p>
 </footer>
-</body>
+
+<!-- PAYSTACK INTEGRATION -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
-  const menuToggle = document.getElementById("menuToggle");
-  const navMenu = document.getElementById("navMenu");
-
-  menuToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("show");
+function payWithPaystack(){
+  var handler = PaystackPop.setup({
+    key: 'pk_live_c9d48a308e8ec8da0e98c03101b3b1e53135cac4', // 🔑 Replace with your client's Paystack public key
+    email: 'customer@example.com',  // You can collect this from a form input
+    amount: 15000 * 100, // ₦2000 in kobo
+    currency: 'NGN',
+    ref: ''+Math.floor(Math.random() * 1000000000 + 1),
+    callback: function(response){
+      alert('Payment successful. Reference: ' + response.reference);
+    },
+    onClose: function(){
+      alert('Transaction was not completed!');
+    }
   });
-
-  // Close menu when link is clicked
-  document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("show");
-    });
-  });
+  handler.openIframe();
+}
 </script>
+</body>
 </html>
