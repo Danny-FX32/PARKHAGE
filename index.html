@@ -7,6 +7,45 @@
 <title>Parkhage Comedy</title>
 
 <style>
+/* HAMBURGER */
+.menu-toggle{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+.menu-toggle span{
+  width:25px;
+  height:3px;
+  background:white;
+  border-radius:3px;
+}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+  nav{
+    position:absolute;
+    top:65px;
+    right:0;
+    background:black;
+    width:100%;
+    display:none;
+    flex-direction:column;
+    text-align:center;
+    padding:1.5rem 0;
+  }
+  nav a{
+    margin:1rem 0;
+    font-size:1.2rem;
+  }
+  nav.show{
+    display:flex;
+  }
+  .menu-toggle{
+    display:flex;
+  }
+}
+
 :root{
   --primary:#ffcc00;
   --dark:#0b0b0b;
@@ -27,13 +66,11 @@ header{
   display:flex;justify-content:space-between;align-items:center;
   animation:drop .8s ease
 }
-
 @keyframes drop{
   from{transform:translateY(-50px);opacity:0}
   to{transform:translateY(0);opacity:1}
 }
-
-header h1{color:var(--primary); font-size: 20px;}
+header h1{color:var(--primary)}
 nav a{color:white;margin-left:1.2rem;text-decoration:none}
 nav a:hover{color:var(--primary); transition: 0.5s;}
 
@@ -48,14 +85,11 @@ nav a:hover{color:var(--primary); transition: 0.5s;}
   display:flex;align-items:center;justify-content:center;
   text-align:center
 }
-
 .hero-content{animation:fadeUp 1.2s ease forwards}
-
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(50px)}
   to{opacity:1;transform:translateY(0)}
 }
-
 .hero h2{font-size:2.6rem;margin-bottom:1rem}
 .hero p{color:var(--text);max-width:650px;margin:auto}
 
@@ -64,23 +98,18 @@ nav a:hover{color:var(--primary); transition: 0.5s;}
   padding:.9rem 2rem;border-radius:30px;
   background:var(--primary);color:black;
   font-weight:bold;text-decoration:none;
-  transition:.3s;
-  border: none;
-  cursor: pointer;
+  transition:.3s;border: none;
 }
-
 .btn:hover{background:white;transform:scale(1.08)}
 
 section{
   padding:4.5rem 2rem;max-width:1200px;margin:auto;
   animation:fadeSection 1s ease both
 }
-
 @keyframes fadeSection{
   from{opacity:0;transform:translateY(40px)}
   to{opacity:1;transform:translateY(0)}
 }
-
 section h3{color:var(--primary);margin-bottom:1.2rem;font-size:2rem}
 
 /* ABOUT */
@@ -88,15 +117,12 @@ section h3{color:var(--primary);margin-bottom:1.2rem;font-size:2rem}
   display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:2rem;align-items:center
 }
-
 .about-wrapper img{
   width:100%;height:300px;object-fit:cover;
   border-radius:15px;transition:.5s;
   object-position: 1px 1px ;
 }
-
 .about-wrapper img:hover{transform:scale(1.05)}
-
 .about p{color:var(--text)}
 
 /* EVENT */
@@ -106,13 +132,10 @@ section h3{color:var(--primary);margin-bottom:1.2rem;font-size:2rem}
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:2rem;align-items:center
 }
-
 .event-card img{
   width:100%;border-radius:15px;transition:.4s
 }
-
 .event-card img:hover{transform:scale(1.05)}
-
 .event-card span{display:block;margin-top:.7rem;font-weight:bold}
 
 /* GALLERY */
@@ -120,12 +143,10 @@ section h3{color:var(--primary);margin-bottom:1.2rem;font-size:2rem}
   display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:1rem
 }
-
 .gallery img{
   width:100%;height:230px;object-fit:cover;
   border-radius:12px;transition:.3s
 }
-
 .gallery img:hover{transform:scale(1.1)}
 
 /* CONTACT */
@@ -142,7 +163,6 @@ section h3{color:var(--primary);margin-bottom:1.2rem;font-size:2rem}
   border-radius:50%;color:white;transition:.3s;
   text-decoration: none;
 }
-
 .socials a:hover{
   background:var(--primary);color:black;transform:translateY(-4px)
 }
@@ -159,8 +179,17 @@ footer{
 
 <body>
 <header>
-  <h1>PARKHAGE</h1>
-  <nav>
+  <h1 style="font-size: 40px; font-weight: bolder;">PARKHAGE</h1>
+
+  <!-- HAMBURGER -->
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navMenu">
     <a href="#about">About</a>
     <a href="#event">Event</a>
     <a href="#gallery">Gallery</a>
@@ -171,9 +200,8 @@ footer{
 <section class="hero">
   <div class="hero-content">
     <h2>Comedy That Feels Real</h2>
-    <p>Real-life stories, NYSC experiences, and everyday Nigerian moments turned into unforgettable laughter.</p>
-    <!-- Button to trigger Paystack -->
-    <button class="btn" onclick="payWithPaystack()">Buy Ticket</button>
+    <p>Real-life stories, NYSC experiences, and everyday Nigerian moments turned into unforgettable laughter. </p>
+    <a href="#contact" class="btn">Book a Seat</a>
   </div>
 </section>
 
@@ -182,9 +210,12 @@ footer{
   <div class="about-wrapper">
     <img src="images/IMG-20260127-WA0057.jpg" alt="Parkhage">
     <p>
-      Born Oyediran Olatoyese Samuel, from Moniya, Ibadan. He carries the spirit of his home in every story.
-      Ọmọ Ẹkùn brings humor out of real life, revealing the beauty in joy, in pain, and in life’s small moments.
-      Through him, we learn to live freely, laugh, and enjoy every moment we have.
+      Born Oyediran Olatoyese Samuel,from Moniya, Ibadan,
+He carries the spirit of his home in every story.
+Ọmọ Ẹkùn brings humor out of real life,
+Revealing the beauty in joy, in pain, and in life’s small moments.
+Through him, we learn to live freely,
+To laugh, to feel, and to enjoy every moment we have.
     </p>
   </div>
 </section>
@@ -195,10 +226,11 @@ footer{
     <img src="images/IMG-20260207-WA0013.jpg" alt="Event">
     <div>
       <h4>Corper Samuel – NYSC Comedy Experience</h4>
-      <p>It shows the struggle, hope, confusion, and growth young Nigerians experience during service. He turns everyday camp moments into laughter and lessons.</p>
-      <h2 style="color: rgb(198, 165, 19);">Upcoming Events</h2>
+      <p>It shows the struggle, the hope, the confusion, and the growth young Nigerians experience during service. He turns everyday camp moment into laughter and lessons, reminding us that unity and national building begin with shared experience </p>
+      <h2 style="color: rgb(198, 165, 19);"> Up Coming Events</h2>
       <span>📅 October 4th, 2026</span>
       <span>🎭 Live Comedy Experience</span>
+      <button class="btn" id="payButton">Buy Ticket</button>
     </div>
   </div>
 </section>
@@ -214,7 +246,7 @@ footer{
 </section>
 
 <section id="contact" class="contact">
-  <h3>Contact / Book</h3>
+  <h3>Book a Seat / Contact</h3>
   <form>
     <input type="text" placeholder="Your Name" required>
     <input type="email" placeholder="Your Email" required>
@@ -233,25 +265,52 @@ footer{
   <p style="margin-top:1rem">© 2026 Parkhage Comedy. All Rights Reserved.</p>
 </footer>
 
-<!-- PAYSTACK INTEGRATION -->
+<!-- SCRIPTS -->
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+  });
+
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("show");
+    });
+  });
+</script>
+
+<!-- PAYSTACK SCRIPT -->
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
-function payWithPaystack(){
-  var handler = PaystackPop.setup({
-    key: 'pk_live_c9d48a308e8ec8da0e98c03101b3b1e53135cac4', // 🔑 Replace with your client's Paystack public key
-    email: 'customer@example.com',  // You can collect this from a form input
-    amount: 15000 * 100, // ₦2000 in kobo
-    currency: 'NGN',
-    ref: ''+Math.floor(Math.random() * 1000000000 + 1),
-    callback: function(response){
-      alert('Payment successful. Reference: ' + response.reference);
-    },
-    onClose: function(){
-      alert('Transaction was not completed!');
-    }
+  const payButton = document.getElementById('payButton');
+
+  payButton.addEventListener('click', function() {
+    let handler = PaystackPop.setup({
+      key: 'pk_live_c9d48a308e8ec8da0e98c03101b3b1e53135cac4', // Client's public key
+      email: 'customer@example.com', // Optional prefill
+      amount: 15000 * 100, // Amount in kobo (₦15000)
+      currency: 'NGN',
+      ref: 'TICKET-' + Math.floor(Math.random() * 1000000), // Unique ref
+      metadata: {
+        custom_fields: [
+          {
+            display_name: "Ticket Type",
+            variable_name: "ticket_type",
+            value: "VIP Ticket"
+          }
+        ]
+      },
+      callback: function(response) {
+        alert('Payment Successful. Transaction ref: ' + response.reference);
+      },
+      onClose: function() {
+        alert('Transaction was not completed.');
+      }
+    });
+    handler.openIframe();
   });
-  handler.openIframe();
-}
 </script>
 </body>
 </html>
